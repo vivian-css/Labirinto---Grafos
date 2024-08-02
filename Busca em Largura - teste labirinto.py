@@ -60,7 +60,7 @@ def main():
 
         inicio, fim = find_inicio_fim(labirinto)
         if not inicio or not fim:
-            print("O labirinto deve conter 'S' e 'E' para início e fim, respectivamente.")
+            print("O labirinto deve conter 'S' e 'E' para início e fim.")
             continue
 
      
