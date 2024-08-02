@@ -10,13 +10,12 @@ def ler_labirinto(arquivo):
         print(f"Arquivo {arquivo} não encontrado.")
         return None
 
-
-def dfs(labirinto, inicio, fim):
-    pilha = [inicio]
+def bfs(labirinto, inicio, fim):
+    queue = deque([inicio])
     veio_de = {inicio: None}
     
-    while pilha:
-        atual = pilha.pop()
+    while queue:
+        atual = queue.popleft()
         if atual == fim:
             break
         
@@ -25,7 +24,7 @@ def dfs(labirinto, inicio, fim):
             
             if (0 <= vizinho[0] < len(labirinto) and 0 <= vizinho[1] < len(labirinto[0]) and
                 labirinto[atual[0]][atual[1]] != '#' and vizinho not in veio_de):
-                pilha.append(vizinho)
+                queue.append(vizinho)
                 veio_de[vizinho] = atual
     
     if fim not in veio_de:
@@ -50,7 +49,7 @@ def find_inicio_fim(labirinto):
     return inicio, fim
 
 def main():
-  while True:
+    while True:
         arquivo = input("Informe o arquivo texto ou (0 para sair): ")
         if arquivo == '0':
             break
@@ -65,9 +64,9 @@ def main():
             continue
 
      
-        print("DFS:")
+        print("BFS:")
         inicio_time = time.time()
-        caminho = dfs(labirinto, inicio, fim)
+        caminho = bfs(labirinto, inicio, fim)
         fim_time = time.time()
 
         if caminho:
@@ -78,3 +77,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
